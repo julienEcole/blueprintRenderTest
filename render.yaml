@@ -1,0 +1,25 @@
+services:
+  - name: my-web-service
+    type: web
+    buildCommand: npm run build
+    startCommand: npm run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+    env:
+      - name: DATABASE_URL
+        fromDatabase:
+          name: my-postgres-db
+          property: connectionString
+
+databases:
+  - name: my-postgres-db
+    type: postgresql
+    plan: hobbyist
+    envVars:
+      - key: POSTGRES_DB
+        value: my_database
+      - key: POSTGRES_USER
+        value: my_user
+      - key: POSTGRES_PASSWORD
+        value: my_password
